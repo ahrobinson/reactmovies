@@ -4,7 +4,8 @@
   "description": "<img src=\"http://www.reactjsprogram.com/images/reactjsprogram-500.png\" width=\"250\" align=\"right\">",
   "main": "index.js",
   "scripts": {
-    "production": "webpack -p"
+    "prod": "webpack -p",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
