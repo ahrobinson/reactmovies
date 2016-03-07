@@ -1,33 +1,71 @@
+/*
+Focused
+Independent
+Resusable
+Small
+Testable
+*/
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var ShowList = React.createClass({
-  render: function(){
-    var listItems = this.props.names.map(function(friend){
-      return <li> {friend} </li>;
-    });
+var userData = {
+  name: "Alon",
+  username: "ahrobinson",
+  img: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAa4AAAAJDJkYTcwNWJmLTFlYTktNDFkYS04NjQ1LTA1ZDM0YjY5MjE1OA.jpg"
+};
+
+var ProfileName = React.createClass({
+  render: function () {
+    return (
+      <div> Name: {this.props.name} </div>
+    )
+  }
+});
+
+var ProfileImg = React.createClass({
+  render: function () {
+    return (
+      <img src={this.props.img} style={{height: 100, width: 100}} />
+    )
+  }
+});
+
+var Link = React.createClass({
+  changeUrl: function () {
+    window.location.replace(this.props.href)
+  },
+  render: function () {
+    return (
+      <span style={{color: 'blue', cursor: 'pointer'}}
+      onClick={this.changeUrl}>
+        {this.props.children}
+      </span>
+    )
+  }
+});
+
+var ProfileLink = React.createClass({
+  render: function () {
     return (
       <div>
-        <h3> Friends </h3>
-        <ul>
-          {listItems}
-        </ul>
+        <Link href={'https://github.com/' + this.props.username}>
+          {this.props.username}
+        </Link>
       </div>
     )
   }
 });
 
-var FriendsContainer = React.createClass({
-  render: function(){
-    var nameba = 'Tyler McGinnis'
-    var friends = ['Ean Platter', 'Murphy Randall', 'Merrick Christensen']
+var Avatar = React.createClass({
+  render: function () {
     return (
       <div>
-        <h3> Name: {nameba} </h3>
-        <ShowList names={friends} />
+        <ProfileName name={this.props.user.name} />
+        <ProfileLink username={this.props.user.username} />
+        <ProfileImg img={this.props.user.img} />
       </div>
     )
   }
 });
 
-ReactDOM.render(<FriendsContainer/>, document.getElementById('app'));
+ReactDOM.render(<Avatar user={userData} />, document.getElementById('app'));
